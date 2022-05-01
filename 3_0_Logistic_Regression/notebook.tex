@@ -1,0 +1,1340 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Logistic\_Regression}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \subsection{Application Flow}\label{application-flow}
+
+Logistic Regression is one of the most fundamental algorithms for
+classification in the Machine Learning world.
+
+But before proceeding with the algorithm, let's first discuss the
+lifecycle of any machine learning model. This diagram explains the
+creation of a Machine Learning model from scratch and then taking the
+same model further with hyperparameter tuning to increase its accuracy,
+deciding the deployment strategies for that model and once deployed
+setting up the logging and monitoring frameworks to generate reports and
+dashboards based on the client requirements. A typical lifecycle diagram
+for a machine learning model looks like:
+
+    \subsection{Introduction}\label{introduction}
+
+In linear regression, the type of data we deal with is quantitative,
+whereas we use classification models to deal with qualitative data or
+categorical data. The algorithms used for solving a classification
+problem first predict the probability of each of the categories of the
+qualitative variables, as the basis for making the classification. And,
+as the probabilities are continuous numbers, classification using
+probabilities also behave like regression methods. Logistic regression
+is one such type of classification model which is used to classify the
+dependent variable into two or more classes or categories.
+
+Why don't we use Linear regression for classification problems?
+
+Let's suppose you took a survey and noted the response of each person as
+satisfied, neutral or Not satisfied. Let's map each category:
+
+Satisfied -- 2
+
+Neutral -- 1
+
+Not Satisfied -- 0
+
+But this doesn't mean that the gap between Not satisfied and Neutral is
+same as Neutral and satisfied. There is no mathematical significance of
+these mapping. We can also map the categories like:
+
+Satisfied -- 0
+
+Neutral -- 1
+
+Not Satisfied -- 2
+
+It's completely fine to choose the above mapping. If we apply linear
+regression to both the type of mappings, we will get different sets of
+predictions. Also, we can get prediction values like 1.2, 0.8, 2.3 etc.
+which makes no sense for categorical values. So, there is no normal
+method to convert qualitative data into quantitative data for use in
+linear regression. Although, for binary classification, i.e. when there
+only two categorical values, using the least square method can give
+decent results. Suppose we have two categories Black and White and we
+map them as follows:
+
+Black -- 0
+
+White - 1
+
+We can assign predicted values for both the categories such as
+Y\textgreater{} 0.5 goes to class white and vice versa. Although, there
+will be some predictions for which the value can be greater than 1 or
+less than 0 making them hard to classify in any class. Nevertheless,
+linear regression can work decently for binary classification but not
+that well for multi-class classification. Hence, we use classification
+methods for dealing with such problems.
+
+    \subsection{Logistic Regression}\label{logistic-regression}
+
+Logistic regression is one such regression algorithm which can be used
+for performing classification problems. It calculates the probability
+that a given value belongs to a specific class. If the probability is
+more than 50\%, it assigns the value in that particular class else if
+the probability is less than 50\%, the value is assigned to the other
+class. Therefore, we can say that logistic regression acts as a binary
+classifier.
+
+Working of a Logistic Model
+
+For linear regression, the model is defined by: \$y = \beta\_0 +
+\beta\_1x \$ - (i)
+
+and for logistic regression, we calculate probability, i.e. y is the
+probability of a given variable x belonging to a certain class. Thus, it
+is obvious that the value of y should lie between 0 and 1.
+
+But, when we use equation(i) to calculate probability, we would get
+values less than 0 as well as greater than 1. That doesn't make any
+sense . So, we need to use such an equation which always gives values
+between 0 and 1, as we desire while calculating the probability.
+
+    \paragraph{Sigmoid function}\label{sigmoid-function}
+
+We use the sigmoid function as the underlying function in Logistic
+regression. Mathematically and graphically, it is shown as:
+
+\textbf{Why do we use the Sigmoid Function?}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\tightlist
+\item
+  The sigmoid function's range is bounded between 0 and 1. Thus it's
+  useful in calculating the probability for the Logistic function.
+\item
+  It's derivative is easy to calculate than other functions which is
+  useful during gradient descent calculation.
+\item
+  It is a simple way of introducing non-linearity to the model.
+\end{enumerate}
+
+Although there are other functions as well, which can be used, but
+sigmoid is the most common function used for logistic regression. We
+will talk about the rest of the functions in the neural network section.
+
+The logistic function is given as:
+
+Let's see some manipulation with the logistic function:
+
+We can see that the logit function is linear in terms with x.
+
+    \textbf{Prediction}
+
+    \textbf{Cost Function}
+
+The cost function for the whole training set is given as :
+
+The values of parameters (θ) for which the cost function is minimum is
+calculated using the gradient descent (as discussed in the Linear
+Regression section) algorithm. The partial derivative for cost function
+is given as :
+
+    \subsubsection{Multiple Logistic
+Function}\label{multiple-logistic-function}
+
+We can generalise the simple logistic function for multiple features as:
+
+And the logit function can be written as:
+
+The coefficients are calculated the same we did for simple logistic
+function, by passing the above equation in the cost function.
+
+Just like we did in multilinear regression, we will check for
+correlation between different features for Multi logistic as well.
+
+We will see how we implement all the above concept through a practical
+example.
+
+    \subsubsection{Multinomial Logistics Regression( Number of Labels
+\textgreater{}2)}\label{multinomial-logistics-regression-number-of-labels-2}
+
+Many times, there are classification problems where the number of
+classes is greater than 2. We can extend Logistic regression for
+multi-class classification. The logic is simple; we train our logistic
+model for each class and calculate the probability(hθx) that a specific
+feature belongs to that class. Once we have trained the model for all
+the classes, we predict a new value's class by choosing that class for
+which the probability(hθx) is maximum. Although we have libraries that
+we can use to perform multinomial logistic regression, we rarely use
+logistic regression for classification problems where the number of
+classes is more than 2. There are many other classification models for
+such scenarios. We will see more of that in the coming lectures.
+
+    \subsubsection{Learning Algorithm}\label{learning-algorithm}
+
+The learning algorithm is how we search the set of possible hypotheses
+(hypothesis space \(\mathcal{H}\)) for the best parameterization (in
+this case the weight vector \({\bf w}\)). This search is an optimization
+problem looking for the hypothesis that optimizes an error measure.
+
+There is no sophisticted, closed-form solution like least-squares
+linear, so we will use gradient descent instead. Specifically we will
+use batch gradient descent which calculates the gradient from all data
+points in the data set.
+
+Luckily, our "cross-entropy" error measure is convex so there is only
+one minimum. Thus the minimum we arrive at is the global minimum.
+
+    To learn we're going to minimize the following error measure using batch
+gradient descent.
+
+\[
+e(h({\bf x}_n), y_n) = \ln \left( 1+e^{-y_n \; {\bf w}^T {\bf x}_n} \right) \\
+E_\text{in}({\bf w}) = \frac{1}{N} \sum_{n=1}^{N} e(h({\bf x}_n), y_n) = \frac{1}{N} \sum_{n=1}^{N} \ln \left( 1+e^{-y_n \; {\bf w}^T {\bf x}_n} \right)
+\]
+
+We'll need the derivative of the point loss function and possibly some
+abuse of notation.
+
+\[
+\frac{d}{d{\bf w}} e(h({\bf x}_n), y_n)
+= \frac{-y_n \; {\bf x}_n \; e^{-y_n {\bf w}^T {\bf x}_n}}{1 + e^{-y_n {\bf w}^T {\bf x}_n}}
+= -\frac{y_n \; {\bf x}_n}{1 + e^{y_n {\bf w}^T {\bf x}_n}}
+\]
+
+    With the point loss derivative we can determine the gradient of the
+in-sample error:
+
+\[
+\begin{align}
+\nabla E_\text{in}({\bf w})
+&= \frac{d}{d{\bf w}} \left[ \frac{1}{N} \sum_{n=1}^N e(h({\bf x}_n), y_n) \right] \\
+&= \frac{1}{N} \sum_{n=1}^N \frac{d}{d{\bf w}} e(h({\bf x}_n), y_n) \\
+&= \frac{1}{N} \sum_{n=1}^N \left( - \frac{y_n \; {\bf x}_n}{1 + e^{y_n {\bf w}^T {\bf x}_n}} \right) \\
+&= - \frac{1}{N} \sum_{n=1}^N \frac{y_n \; {\bf x}_n}{1 + e^{y_n {\bf w}^T {\bf x}_n}} \\
+\end{align}
+\]
+
+Our weight update rule per batch gradient descent becomes
+
+\[
+\begin{align}
+{\bf w}_{i+1} &= {\bf w}_i - \eta \; \nabla E_\text{in}({\bf w}_i) \\
+&= {\bf w}_i - \eta \; \left( - \frac{1}{N} \sum_{n=1}^N \frac{y_n \; {\bf x}_n}{1 + e^{y_n {\bf w}_i^T {\bf x}_n}} \right) \\
+&= {\bf w}_i + \eta \; \left( \frac{1}{N} \sum_{n=1}^N \frac{y_n \; {\bf x}_n}{1 + e^{y_n {\bf w}_i^T {\bf x}_n}} \right) \\
+\end{align}
+\]
+
+where \(\eta\) is the learning rate.
+
+    \subsection{Evaluation of a Classification
+Model}\label{evaluation-of-a-classification-model}
+
+    In machine learning, once we have a result of the classification
+problem, how do we measure how accurate our classification is? For a
+regression problem, we have different metrics like R Squared score, Mean
+Squared Error etc. what are the metrics to measure the credibility of a
+classification model?
+
+Metrics In a regression problem, the accuracy is generally measured in
+terms of the difference in the actual values and the predicted values.
+In a classification problem, the credibility of the model is measured
+using the confusion matrix generated, i.e., how accurately the true
+positives and true negatives were predicted. The different metrics used
+for this purpose are: - Accuracy - Recall - Precision - F1 Score -
+Specifity - AUC( Area Under the Curve) - RUC(Receiver Operator
+Characteristic)
+
+    \subsubsection{Confusion Matrix}\label{confusion-matrix}
+
+A typical confusion matrix looks like the figure shown.
+
+Where the terms have the meaning:
+
+ \textbf{True Positive(TP):} A result that was predicted as positive by
+the classification model and also is positive
+
+ \textbf{True Negative(TN):} A result that was predicted as negative by
+the classification model and also is negative
+
+ \textbf{False Positive(FP):} A result that was predicted as positive
+by the classification model but actually is negative
+
+ \textbf{False Negative(FN):} A result that was predicted as negative
+by the classification model but actually is positive.
+
+The Credibility of the model is based on how many correct predictions
+did the model do.
+
+    \subsubsection{Accuracy}\label{accuracy}
+
+The mathematical formula is :
+
+\textbf{Accuracy}= \$ \frac{ (TP+TN)}{(TP+TN+FP+FN)} \$
+
+Or, it can be said that it's defined as the total number of correct
+classifications divided by the total number of classifications.
+
+    \paragraph{Recall or Sensitivity}\label{recall-or-sensitivity}
+
+The mathematical formula is:
+
+\textbf{Recall}= \$ \frac{ TP}{(TP+FN)} \$
+
+Or, as the name suggests, it is a measure of: from the total number of
+positive results how many positives were correctly predicted by the
+model.
+
+It shows how relevant the model is, in terms of positive results only.
+
+Let's suppose in the previous model, the model gave 50 correct
+predictions(TP) but failed to identify 200 cancer patients(FN). Recall
+in that case will be:
+
+Recall=\$ \frac {50}{(50+200)} \$= 0.2 (The model was able to recall
+only 20\% of the cancer patients)
+
+    \subsubsection{Precision}\label{precision}
+
+Precision is a measure of amongst all the positive predictions, how many
+of them were actually positive. Mathematically,
+
+Precision=\$ \frac {TP}{(TP+FP)} \$
+
+Let's suppose in the previous example, the model identified 50 people as
+cancer patients(TP) but also raised a false alarm for 100 patients(FP).
+Hence,
+
+Precision=\$ \frac {50}{(50+100)} \$=0.33 (The model only has a
+precision of 33\%)
+
+    \subsubsection{But we have a problem!!}\label{but-we-have-a-problem}
+
+As evident from the previous example, the model had a very high Accuracy
+but performed poorly in terms of Precision and Recall. So, necessarily
+\emph{Accuracy} is not the metric to use for evaluating the model in
+this case.
+
+Imagine a scenario, where the requirement was that the model recalled
+all the defaulters who did not pay back the loan. Suppose there were 10
+such defaulters and to recall those 10 defaulters, and the model gave
+you 20 results out of which only the 10 are the actual defaulters. Now,
+the recall of the model is 100\%, but the precision goes down to 50\%.
+
+    \subsubsection{A Trade-off?}\label{a-trade-off}
+
+As observed from the graph, with an increase in the Recall, there is a
+drop in Precision of the model.
+
+So the question is - what to go for? Precision or Recall?
+
+Well, the answer is: it depends on the business requirement.
+
+For example, if you are predicting cancer, you need a 100 \% recall. But
+suppose you are predicting whether a person is innocent or not, you need
+100\% precision.
+
+Can we maximise both at the same time? No
+
+So, there is a need for a better metric then?
+
+Yes. And it's called an \emph{F1 Score}
+
+    \subsubsection{F1 Score}\label{f1-score}
+
+From the previous examples, it is clear that we need a metric that
+considers both Precision and Recall for evaluating a model. One such
+metric is the F1 score.
+
+F1 score is defined as the harmonic mean of Precision and Recall.
+
+The mathematical formula is: F1 score= \$
+\frac {2*((Precision*Recall)}{(Precision+Recall))} \$
+
+    \subsubsection{Specificity or True Negative
+Rate}\label{specificity-or-true-negative-rate}
+
+This represents how specific is the model while predicting the True
+Negatives. Mathematically,
+
+Specificity=\$ \frac {TN}{(TN+FP)} \$ Or, it can be said that it
+quantifies the total number of negatives predicted by the model with
+respect to the total number of actual negative or non favorable
+outcomes.
+
+Similarly, False Positive rate can be defined as: (1- specificity) Or,
+\$ \frac {FP}{(TN+FP)} \$
+
+    \subsubsection{ROC(Receiver Operator
+Characteristic)}\label{rocreceiver-operator-characteristic}
+
+We know that the classification algorithms work on the concept of
+probability of occurrence of the possible outcomes. A probability value
+lies between 0 and 1. Zero means that there is no probability of
+occurrence and one means that the occurrence is certain.
+
+But while working with real-time data, it has been observed that we
+seldom get a perfect 0 or 1 value. Instead of that, we get different
+decimal values lying between 0 and 1. Now the question is if we are not
+getting binary probability values how are we actually determining the
+class in our classification problem?
+
+There comes the concept of Threshold. A threshold is set, any
+probability value below the threshold is a negative outcome, and
+anything more than the threshold is a favourable or the positive
+outcome. For Example, if the threshold is 0.5, any probability value
+below 0.5 means a negative or an unfavourable outcome and any value
+above 0.5 indicates a positive or favourable outcome.
+
+Now, the question is, what should be an ideal threshold?
+
+    The following diagram shows a typical logistic regression curve.
+
+\begin{itemize}
+\tightlist
+\item
+  The horizontal lines represent the various values of thresholds
+  ranging from 0 to 1.
+\item
+  Let's suppose our classification problem was to identify the obese
+  people from the given data.
+\item
+  The green markers represent obese people and the red markers represent
+  the non-obese people.
+\item
+  Our confusion matrix will depend on the value of the threshold chosen
+  by us.
+\item
+  For Example, if 0.25 is the threshold then TP(actually obese)=3 TN(Not
+  obese)=2 FP(Not obese but predicted obese)=2(the two red squares above
+  the 0.25 line) FN(Obese but predicted as not obese )=1(Green circle
+  below 0.25line )
+\end{itemize}
+
+    A typical ROC curve looks like the following figure.
+
+\begin{itemize}
+\tightlist
+\item
+  Mathematically, it represents the various confusion matrices for
+  various thresholds. Each black dot is one confusion matrix.
+\item
+  The green dotted line represents the scenario when the true positive
+  rate equals the false positive rate.
+\item
+  As evident from the curve, as we move from the rightmost dot towards
+  left, after a certain threshold, the false positive rate decreases.
+\item
+  After some time, the false positive rate becomes zero.
+\item
+  The point encircled in green is the best point as it predicts all the
+  values correctly and keeps the False positive as a minimum.
+\item
+  But that is not a rule of thumb. Based on the requirement, we need to
+  select the point of a threshold.
+\item
+  The ROC curve answers our question of which threshold to choose.
+\end{itemize}
+
+    \subsubsection{But we have a confusion!!}\label{but-we-have-a-confusion}
+
+Let's suppose that we used different classification algorithms, and
+different ROCs for the corresponding algorithms have been plotted. The
+question is: which algorithm to choose now? The answer is to calculate
+the area under each ROC curve.
+
+    \paragraph{AUC(Area Under Curve)}\label{aucarea-under-curve}
+
+\begin{itemize}
+\tightlist
+\item
+  It helps us to choose the best model amongst the models for which we
+  have plotted the ROC curves
+\item
+  The best model is the one which encompasses the maximum area under it.
+\item
+  In the adjacent diagram, amongst the two curves, the model that
+  resulted in the red one should be chosen as it clearly covers more
+  area than the blue one
+\end{itemize}
+
+    \#\# Python Implementation
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{}Let\PYZsq{}s start with importing necessary libraries}
+        
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd} 
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np} 
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k}{import} \PY{n}{StandardScaler} 
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model}  \PY{k}{import} \PY{n}{Ridge}\PY{p}{,}\PY{n}{Lasso}\PY{p}{,}\PY{n}{RidgeCV}\PY{p}{,} \PY{n}{LassoCV}\PY{p}{,} \PY{n}{ElasticNet}\PY{p}{,} \PY{n}{ElasticNetCV}\PY{p}{,} \PY{n}{LogisticRegression}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+        \PY{k+kn}{from} \PY{n+nn}{statsmodels}\PY{n+nn}{.}\PY{n+nn}{stats}\PY{n+nn}{.}\PY{n+nn}{outliers\PYZus{}influence} \PY{k}{import} \PY{n}{variance\PYZus{}inflation\PYZus{}factor} 
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{accuracy\PYZus{}score}\PY{p}{,} \PY{n}{confusion\PYZus{}matrix}\PY{p}{,} \PY{n}{roc\PYZus{}curve}\PY{p}{,} \PY{n}{roc\PYZus{}auc\PYZus{}score}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+        \PY{k+kn}{import} \PY{n+nn}{scikitplot} \PY{k}{as} \PY{n+nn}{skl}
+        \PY{n}{sns}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{diabetes.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{} Reading the Data}
+        \PY{n}{data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:}    Pregnancies  Glucose  BloodPressure  SkinThickness  Insulin   BMI  \textbackslash{}
+        0            6      148             72             35        0  33.6   
+        1            1       85             66             29        0  26.6   
+        2            8      183             64              0        0  23.3   
+        3            1       89             66             23       94  28.1   
+        4            0      137             40             35      168  43.1   
+        
+           DiabetesPedigreeFunction  Age  Outcome  
+        0                     0.627   50        1  
+        1                     0.351   31        0  
+        2                     0.672   32        1  
+        3                     0.167   21        0  
+        4                     2.288   33        1  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{data}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:}        Pregnancies     Glucose  BloodPressure  SkinThickness     Insulin  \textbackslash{}
+        count   768.000000  768.000000     768.000000     768.000000  768.000000   
+        mean      3.845052  120.894531      69.105469      20.536458   79.799479   
+        std       3.369578   31.972618      19.355807      15.952218  115.244002   
+        min       0.000000    0.000000       0.000000       0.000000    0.000000   
+        25\%       1.000000   99.000000      62.000000       0.000000    0.000000   
+        50\%       3.000000  117.000000      72.000000      23.000000   30.500000   
+        75\%       6.000000  140.250000      80.000000      32.000000  127.250000   
+        max      17.000000  199.000000     122.000000      99.000000  846.000000   
+        
+                      BMI  DiabetesPedigreeFunction         Age     Outcome  
+        count  768.000000                768.000000  768.000000  768.000000  
+        mean    31.992578                  0.471876   33.240885    0.348958  
+        std      7.884160                  0.331329   11.760232    0.476951  
+        min      0.000000                  0.078000   21.000000    0.000000  
+        25\%     27.300000                  0.243750   24.000000    0.000000  
+        50\%     32.000000                  0.372500   29.000000    0.000000  
+        75\%     36.600000                  0.626250   41.000000    1.000000  
+        max     67.100000                  2.420000   81.000000    1.000000  
+\end{Verbatim}
+            
+    It seems that there are no missing values in our data. Great, let's see
+the distribution of data:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{c+c1}{\PYZsh{} let\PYZsq{}s see how data is distributed for every column}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{25}\PY{p}{)}\PY{p}{,} \PY{n}{facecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{white}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plotnumber} \PY{o}{=} \PY{l+m+mi}{1}
+         
+         \PY{k}{for} \PY{n}{column} \PY{o+ow}{in} \PY{n}{data}\PY{p}{:}
+             \PY{k}{if} \PY{n}{plotnumber}\PY{o}{\PYZlt{}}\PY{o}{=}\PY{l+m+mi}{9} \PY{p}{:}     \PY{c+c1}{\PYZsh{} as there are 9 columns in the data}
+                 \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{n}{plotnumber}\PY{p}{)}
+                 \PY{n}{sns}\PY{o}{.}\PY{n}{distplot}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{column}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{n}{column}\PY{p}{,}\PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+                 \PY{c+c1}{\PYZsh{}plt.ylabel(\PYZsq{}Salary\PYZsq{},fontsize=20)}
+             \PY{n}{plotnumber}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_31_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    We can see there is some skewness in the data, let's deal with data.
+
+Also, we can see there few data for columns Glucose, Insulin, skin
+thickness, BMI and Blood Pressure which have value as 0. That's not
+possible. You can do a quick search to see that one cannot have 0 values
+for these. Let's deal with that. we can either remove such data or
+simply replace it with their respective mean values. Let's do the
+latter.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} replacing zero values with the mean of the column}
+        \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{BMI}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{BMI}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{BMI}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{BloodPressure}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{BloodPressure}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{BloodPressure}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Glucose}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Glucose}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Glucose}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Insulin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Insulin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Insulin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SkinThickness}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SkinThickness}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SkinThickness}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{} let\PYZsq{}s see how data is distributed for every column}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{25}\PY{p}{)}\PY{p}{,} \PY{n}{facecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{white}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plotnumber} \PY{o}{=} \PY{l+m+mi}{1}
+        
+        \PY{k}{for} \PY{n}{column} \PY{o+ow}{in} \PY{n}{data}\PY{p}{:}
+            \PY{k}{if} \PY{n}{plotnumber}\PY{o}{\PYZlt{}}\PY{o}{=}\PY{l+m+mi}{9} \PY{p}{:}
+                \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{n}{plotnumber}\PY{p}{)}
+                \PY{n}{sns}\PY{o}{.}\PY{n}{distplot}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{column}\PY{p}{]}\PY{p}{)}
+                \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{n}{column}\PY{p}{,}\PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{}plt.ylabel(\PYZsq{}Salary\PYZsq{},fontsize=20)}
+            \PY{n}{plotnumber}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_34_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Now we have dealt with the 0 values and data looks better. But, there
+still are outliers present in some columns. Let's deal with them.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+        \PY{n}{sns}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{n}{data}\PY{p}{,} \PY{n}{width}\PY{o}{=} \PY{l+m+mf}{0.5}\PY{p}{,}\PY{n}{ax}\PY{o}{=}\PY{n}{ax}\PY{p}{,}  \PY{n}{fliersize}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x1f87a035828>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_36_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{q} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pregnancies}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{quantile}\PY{p}{(}\PY{l+m+mf}{0.98}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} we are removing the top 2\PYZpc{} data from the Pregnancies column}
+        \PY{n}{data\PYZus{}cleaned} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pregnancies}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{\PYZlt{}}\PY{n}{q}\PY{p}{]}
+        \PY{n}{q} \PY{o}{=} \PY{n}{data\PYZus{}cleaned}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{BMI}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{quantile}\PY{p}{(}\PY{l+m+mf}{0.99}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} we are removing the top 1\PYZpc{} data from the BMI column}
+        \PY{n}{data\PYZus{}cleaned}  \PY{o}{=} \PY{n}{data\PYZus{}cleaned}\PY{p}{[}\PY{n}{data\PYZus{}cleaned}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{BMI}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{\PYZlt{}}\PY{n}{q}\PY{p}{]}
+        \PY{n}{q} \PY{o}{=} \PY{n}{data\PYZus{}cleaned}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SkinThickness}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{quantile}\PY{p}{(}\PY{l+m+mf}{0.99}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} we are removing the top 1\PYZpc{} data from the SkinThickness column}
+        \PY{n}{data\PYZus{}cleaned}  \PY{o}{=} \PY{n}{data\PYZus{}cleaned}\PY{p}{[}\PY{n}{data\PYZus{}cleaned}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SkinThickness}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{\PYZlt{}}\PY{n}{q}\PY{p}{]}
+        \PY{n}{q} \PY{o}{=} \PY{n}{data\PYZus{}cleaned}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Insulin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{quantile}\PY{p}{(}\PY{l+m+mf}{0.95}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} we are removing the top 5\PYZpc{} data from the Insulin column}
+        \PY{n}{data\PYZus{}cleaned}  \PY{o}{=} \PY{n}{data\PYZus{}cleaned}\PY{p}{[}\PY{n}{data\PYZus{}cleaned}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Insulin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{\PYZlt{}}\PY{n}{q}\PY{p}{]}
+        \PY{n}{q} \PY{o}{=} \PY{n}{data\PYZus{}cleaned}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{DiabetesPedigreeFunction}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{quantile}\PY{p}{(}\PY{l+m+mf}{0.99}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} we are removing the top 1\PYZpc{} data from the DiabetesPedigreeFunction column}
+        \PY{n}{data\PYZus{}cleaned}  \PY{o}{=} \PY{n}{data\PYZus{}cleaned}\PY{p}{[}\PY{n}{data\PYZus{}cleaned}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{DiabetesPedigreeFunction}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{\PYZlt{}}\PY{n}{q}\PY{p}{]}
+        \PY{n}{q} \PY{o}{=} \PY{n}{data\PYZus{}cleaned}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{quantile}\PY{p}{(}\PY{l+m+mf}{0.99}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} we are removing the top 1\PYZpc{} data from the Age column}
+        \PY{n}{data\PYZus{}cleaned}  \PY{o}{=} \PY{n}{data\PYZus{}cleaned}\PY{p}{[}\PY{n}{data\PYZus{}cleaned}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{\PYZlt{}}\PY{n}{q}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{} let\PYZsq{}s see how data is distributed for every column}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{25}\PY{p}{)}\PY{p}{,} \PY{n}{facecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{white}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plotnumber} \PY{o}{=} \PY{l+m+mi}{1}
+         
+         \PY{k}{for} \PY{n}{column} \PY{o+ow}{in} \PY{n}{data\PYZus{}cleaned}\PY{p}{:}
+             \PY{k}{if} \PY{n}{plotnumber}\PY{o}{\PYZlt{}}\PY{o}{=}\PY{l+m+mi}{9} \PY{p}{:}
+                 \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{n}{plotnumber}\PY{p}{)}
+                 \PY{n}{sns}\PY{o}{.}\PY{n}{distplot}\PY{p}{(}\PY{n}{data\PYZus{}cleaned}\PY{p}{[}\PY{n}{column}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{n}{column}\PY{p}{,}\PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+                 \PY{c+c1}{\PYZsh{}plt.ylabel(\PYZsq{}Salary\PYZsq{},fontsize=20)}
+             \PY{n}{plotnumber}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_38_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The data looks much better now than before. We will start our analysis
+with this data now as we don't want to lose important information. If
+our model doesn't work with accuracy, we will come back for more
+preprocessing.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{X} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Outcome}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{y} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Outcome}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    Before we fit our data to a model, let's visualize the relationship
+between our independent variables and the categories.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{} let\PYZsq{}s see how data is distributed for every column}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{25}\PY{p}{)}\PY{p}{,} \PY{n}{facecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{white}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plotnumber} \PY{o}{=} \PY{l+m+mi}{1}
+         
+         \PY{k}{for} \PY{n}{column} \PY{o+ow}{in} \PY{n}{X}\PY{p}{:}
+             \PY{k}{if} \PY{n}{plotnumber}\PY{o}{\PYZlt{}}\PY{o}{=}\PY{l+m+mi}{9} \PY{p}{:}
+                 \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{n}{plotnumber}\PY{p}{)}
+                 \PY{n}{sns}\PY{o}{.}\PY{n}{stripplot}\PY{p}{(}\PY{n}{y}\PY{p}{,}\PY{n}{X}\PY{p}{[}\PY{n}{column}\PY{p}{]}\PY{p}{)}
+             \PY{n}{plotnumber}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{tight\PYZus{}layout}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_42_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Great!! Let's proceed by checking multicollinearity in the dependent
+variables. Before that, we should scale our data. Let's use the standard
+scaler for that.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{scalar} \PY{o}{=} \PY{n}{StandardScaler}\PY{p}{(}\PY{p}{)}
+         \PY{n}{X\PYZus{}scaled} \PY{o}{=} \PY{n}{scalar}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+C:\textbackslash{}Users\textbackslash{}virat\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}preprocessing\textbackslash{}data.py:645: DataConversionWarning: Data with input dtype int64, float64 were all converted to float64 by StandardScaler.
+  return self.partial\_fit(X, y)
+C:\textbackslash{}Users\textbackslash{}virat\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}base.py:464: DataConversionWarning: Data with input dtype int64, float64 were all converted to float64 by StandardScaler.
+  return self.fit(X, **fit\_params).transform(X)
+
+    \end{Verbatim}
+
+    This is how our data looks now after scaling. Great, now we will check
+for multicollinearity using VIF(Variance Inflation factor)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{X\PYZus{}scaled}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:} array([[ 0.63994726,  0.86527574, -0.0210444 , {\ldots},  0.16725546,
+                  0.46849198,  1.4259954 ],
+                [-0.84488505, -1.20598931, -0.51658286, {\ldots}, -0.85153454,
+                 -0.36506078, -0.19067191],
+                [ 1.23388019,  2.01597855, -0.68176235, {\ldots}, -1.33182125,
+                  0.60439732, -0.10558415],
+                {\ldots},
+                [ 0.3429808 , -0.02240928, -0.0210444 , {\ldots}, -0.90975111,
+                 -0.68519336, -0.27575966],
+                [-0.84488505,  0.14197684, -1.01212132, {\ldots}, -0.34213954,
+                 -0.37110101,  1.17073215],
+                [-0.84488505, -0.94297153, -0.18622389, {\ldots}, -0.29847711,
+                 -0.47378505, -0.87137393]])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{vif} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{)}
+         \PY{n}{vif}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{vif}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{p}{[}\PY{n}{variance\PYZus{}inflation\PYZus{}factor}\PY{p}{(}\PY{n}{X\PYZus{}scaled}\PY{p}{,}\PY{n}{i}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{X\PYZus{}scaled}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{]}
+         \PY{n}{vif}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Features}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{columns}
+         
+         \PY{c+c1}{\PYZsh{}let\PYZsq{}s check the values}
+         \PY{n}{vif}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}15}]:}         vif                  Features
+         0  1.431075               Pregnancies
+         1  1.347308                   Glucose
+         2  1.247914             BloodPressure
+         3  1.450510             SkinThickness
+         4  1.262111                   Insulin
+         5  1.550227                       BMI
+         6  1.058104  DiabetesPedigreeFunction
+         7  1.605441                       Age
+\end{Verbatim}
+            
+    All the VIF values are less than 5 and are very low. That means no
+multicollinearity. Now, we can go ahead with fitting our data to the
+model. Before that, let's split our data in test and training set.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{x\PYZus{}train}\PY{p}{,}\PY{n}{x\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{X\PYZus{}scaled}\PY{p}{,}\PY{n}{y}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{o}{=} \PY{l+m+mf}{0.25}\PY{p}{,} \PY{n}{random\PYZus{}state} \PY{o}{=} \PY{l+m+mi}{355}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{log\PYZus{}reg} \PY{o}{=} \PY{n}{LogisticRegression}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{log\PYZus{}reg}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{x\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+C:\textbackslash{}Users\textbackslash{}virat\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}linear\_model\textbackslash{}logistic.py:433: FutureWarning: Default solver will be changed to 'lbfgs' in 0.22. Specify a solver to silence this warning.
+  FutureWarning)
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:} LogisticRegression(C=1.0, class\_weight=None, dual=False, fit\_intercept=True,
+                   intercept\_scaling=1, max\_iter=100, multi\_class='warn',
+                   n\_jobs=None, penalty='l2', random\_state=None, solver='warn',
+                   tol=0.0001, verbose=0, warm\_start=False)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{k+kn}{import} \PY{n+nn}{pickle}
+         \PY{c+c1}{\PYZsh{} Writing different model files to file}
+         \PY{k}{with} \PY{n+nb}{open}\PY{p}{(} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{modelForPrediction.sav}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{wb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:}
+             \PY{n}{pickle}\PY{o}{.}\PY{n}{dump}\PY{p}{(}\PY{n}{log\PYZus{}reg}\PY{p}{,}\PY{n}{f}\PY{p}{)}
+             
+         \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sandardScalar.sav}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{wb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:}
+             \PY{n}{pickle}\PY{o}{.}\PY{n}{dump}\PY{p}{(}\PY{n}{scalar}\PY{p}{,}\PY{n}{f}\PY{p}{)}
+\end{Verbatim}
+
+
+    Let's see how well our model performs on the test data set.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{log\PYZus{}reg}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{x\PYZus{}test}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{accuracy} \PY{o}{=} \PY{n}{accuracy\PYZus{}score}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}pred}\PY{p}{)}
+         \PY{n}{accuracy}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}22}]:} 0.7552083333333334
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{c+c1}{\PYZsh{} Confusion Matrix}
+         \PY{n}{conf\PYZus{}mat} \PY{o}{=} \PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}pred}\PY{p}{)}
+         \PY{n}{conf\PYZus{}mat}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}23}]:} array([[110,  15],
+                [ 32,  35]], dtype=int64)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{true\PYZus{}positive} \PY{o}{=} \PY{n}{conf\PYZus{}mat}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{false\PYZus{}positive} \PY{o}{=} \PY{n}{conf\PYZus{}mat}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+         \PY{n}{false\PYZus{}negative} \PY{o}{=} \PY{n}{conf\PYZus{}mat}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{true\PYZus{}negative} \PY{o}{=} \PY{n}{conf\PYZus{}mat}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{c+c1}{\PYZsh{} Breaking down the formula for Accuracy}
+         \PY{n}{Accuracy} \PY{o}{=} \PY{p}{(}\PY{n}{true\PYZus{}positive} \PY{o}{+} \PY{n}{true\PYZus{}negative}\PY{p}{)} \PY{o}{/} \PY{p}{(}\PY{n}{true\PYZus{}positive} \PY{o}{+}\PY{n}{false\PYZus{}positive} \PY{o}{+} \PY{n}{false\PYZus{}negative} \PY{o}{+} \PY{n}{true\PYZus{}negative}\PY{p}{)}
+         \PY{n}{Accuracy}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}25}]:} 0.7552083333333334
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{c+c1}{\PYZsh{} Precison}
+         \PY{n}{Precision} \PY{o}{=} \PY{n}{true\PYZus{}positive}\PY{o}{/}\PY{p}{(}\PY{n}{true\PYZus{}positive}\PY{o}{+}\PY{n}{false\PYZus{}positive}\PY{p}{)}
+         \PY{n}{Precision}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}26}]:} 0.88
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{c+c1}{\PYZsh{} Recall}
+         \PY{n}{Recall} \PY{o}{=} \PY{n}{true\PYZus{}positive}\PY{o}{/}\PY{p}{(}\PY{n}{true\PYZus{}positive}\PY{o}{+}\PY{n}{false\PYZus{}negative}\PY{p}{)}
+         \PY{n}{Recall}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}27}]:} 0.7746478873239436
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{c+c1}{\PYZsh{} F1 Score}
+         \PY{n}{F1\PYZus{}Score} \PY{o}{=} \PY{l+m+mi}{2}\PY{o}{*}\PY{p}{(}\PY{n}{Recall} \PY{o}{*} \PY{n}{Precision}\PY{p}{)} \PY{o}{/} \PY{p}{(}\PY{n}{Recall} \PY{o}{+} \PY{n}{Precision}\PY{p}{)}
+         \PY{n}{F1\PYZus{}Score}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}28}]:} 0.8239700374531835
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{c+c1}{\PYZsh{} Area Under Curve}
+         \PY{n}{auc} \PY{o}{=} \PY{n}{roc\PYZus{}auc\PYZus{}score}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}pred}\PY{p}{)}
+         \PY{n}{auc}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}29}]:} 0.7011940298507463
+\end{Verbatim}
+            
+    \textbf{ROC}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{fpr}\PY{p}{,} \PY{n}{tpr}\PY{p}{,} \PY{n}{thresholds} \PY{o}{=} \PY{n}{roc\PYZus{}curve}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}pred}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{fpr}\PY{p}{,} \PY{n}{tpr}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{orange}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ROC}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{darkblue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ROC curve (area = }\PY{l+s+si}{\PYZpc{}0.2f}\PY{l+s+s1}{)}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{auc}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{False Positive Rate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{True Positive Rate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Receiver Operating Characteristic (ROC) Curve}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_64_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \paragraph{What is the significance of Roc curve and
+AUC?}\label{what-is-the-significance-of-roc-curve-and-auc}
+
+In real life, we create various models using different algorithms that
+we can use for classification purpose. We use AUC to determine which
+model is the best one to use for a given dataset. Suppose we have
+created Logistic regression, SVM as well as a clustering model for
+classification purpose. We will calculate AUC for all the models
+seperately. The model with highest AUC value will be the best model to
+use.
+
+    \paragraph{Advantages of Logisitic
+Regression}\label{advantages-of-logisitic-regression}
+
+\begin{itemize}
+\tightlist
+\item
+  It is very simple and easy to implement.
+\item
+  The output is more informative than other classification algorithms
+\item
+  It expresses the relationship between independent and dependent
+  variables
+\item
+  Very effective with linearly seperable data
+\end{itemize}
+
+\paragraph{Disadvantages of Logisitic
+Regression}\label{disadvantages-of-logisitic-regression}
+
+\begin{itemize}
+\tightlist
+\item
+  Not effective with data which are not linearly seperable
+\item
+  Not as powerful as other classification models
+\item
+  Multiclass classifications are much easier to do with other algorithms
+  than logisitic regression
+\item
+  It can only predict categorical outcomes
+\end{itemize}
+
+    \subsection{Cloud Deployment (Heroku)}\label{cloud-deployment-heroku}
+
+Once the training is completed, we need to expose the trained model as
+an API for the user to consume it. For prediction, the saved model is
+loaded first and then the predictions are made using it. If the web app
+works fine, the same app is deployed to the cloud platform. The
+application flow for cloud deployment looks like:
+
+    \subsubsection{Pre-requisites for cloud
+deployment:}\label{pre-requisites-for-cloud-deployment}
+
+\begin{itemize}
+\tightlist
+\item
+  Basic knowledge of flask framework.
+\item
+  Any Python IDE installed(we are using PyCharm).
+\item
+  A Heroku account.
+\item
+  Basic understanding of HTML.
+\end{itemize}
+
+    \subsubsection{Steps before cloud
+deployment:}\label{steps-before-cloud-deployment}
+
+We need to change our code a bit so that it works unhindered on the
+cloud, as well.
+
+\begin{itemize}
+\item
+  Add a file called `gitignore' inside the project folder. This folder
+  contains the list of the files which we don't want to include in the
+  git repository. My gitignore file looks like:
+
+  \textbf{.idea}
+\end{itemize}
+
+As I am using PyCharm as an IDE, and it's provided by the Intellij Idea
+community, it automatically adds the .idea folder containing some
+metadata. We need not include them in our cloud app.
+
+\begin{itemize}
+\item
+  Add a file called `Procfile' inside the `reviewScrapper' folder. This
+  folder contains the command to run the flask application once deployed
+  on the server:
+
+  \textbf{web: gunicorn app:app}
+\end{itemize}
+
+Here, the keyword `web' specifies that the application is a web
+application. And the part `app:app' instructs the program to look for a
+flask application called `app' inside the `app.py' file. Gunicorn is a
+Web Server Gateway Interface (WSGI) HTTP server for Python.
+
+\begin{itemize}
+\tightlist
+\item
+  Open a command prompt window and navigate to your `reviewScrapper'
+  folder. Enter the command `pip freeze \textgreater{}
+  requirements.txt'. This command generates the `requirements.txt' file
+\end{itemize}
+
+The requirements.txt helps the Heroku cloud app to install all the
+dependencies before starting the webserver.
+
+    After performing all the above steps the project structure will look
+like:
+
+    \subsubsection{Deployment to Heroku:}\label{deployment-to-heroku}
+
+\begin{itemize}
+\tightlist
+\item
+  After installing the Heroku CLI, Open a command prompt window and
+  navigate to your project folder.
+\item
+  Type the command \textbf{heroku login} to login to your heroku
+  account.
+\item
+  After logging in to Heroku, enter the command \textbf{heroku create}
+  to create a heroku app. It will give you the URL of your Heroku app
+  after successful creation. Or alternatively, you can go to the heroku
+  website and create an app directly.
+\item
+  Before deploying the code to the Heroku cloud, we need to commit the
+  changes to the git repository.
+\item
+  Type the command \textbf{git init} to initialize a local git
+  repository.
+\item
+  Enter the command \textbf{git status} to see the uncommitted changes.
+\item
+  Enter the command \textbf{git add .} to add the uncommitted changes to
+  the local repository.
+\item
+  Enter the command \textbf{git commit -am "make it better"} to commit
+  the changes to the local repository.
+\item
+  Enter the command \textbf{git push heroku master} to push the code to
+  the heroku cloud.
+\item
+  After deployment, heroku gives you the URL to hit the web API.
+\item
+  Once your application is deployed successfully, enter the command
+  \textbf{heroku logs -\/-tail} to see the logs.
+\end{itemize}
+
+    All the code is available in iNeuron git repo.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
